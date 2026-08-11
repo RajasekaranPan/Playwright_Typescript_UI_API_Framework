@@ -1,0 +1,16 @@
+[
+  {
+    "TestCaseId": "TC001",
+    "Scenario": "Validate Valid Login Credentials",
+    "UsernameKey": "VALID_USERNAME",
+    "PasswordKey": "VALID_PASSWORD",
+    "ExpectedResult": "success"
+  },
+  {
+    "TestCaseId": "TC002",
+    "Scenario": "Validate Invalid Login Credentials",
+    "UsernameKey": "INVALID_USERNAME",
+    "PasswordKey": "INVALID_PASSWORD",
+    "ExpectedResult": "failure"
+  }
+]

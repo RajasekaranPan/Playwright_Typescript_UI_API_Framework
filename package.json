@@ -1,0 +1,34 @@
+{
+  "name": "playwrightwithtypescript_wishinfiniteyoutube",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:qa": "cross-env ENV_NAME=qa npx playwright test --project=chromium --config=playwright.config.ts ",
+    "comment": "the below command to run tests in headed mode with HTML report generation",
+    "test:qa:hd:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed",
+    "test:qa:headless:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --reporter=html --config=playwright.config.ts",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "test:report:open": "npx playwright show-report --project=chromium",
+    "test:report:html": "npx playwright show-report --project=chromium --html",
+    "test:report:json": "npx playwright show-report --project=chromium --json",
+    "test:report:xml": "npx playwright show-report --project=chromium --xml",
+    "test:report:csv": "npx playwright show-report --project=chromium --csv",
+    "test:report:all": "npx playwright show-report --project=chromium --all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^26.2.0"
+  },
+  "dependencies": {
+    "cross-env": "^10.1.0",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^17.4.2",
+    "xlsx": "^0.18.5"
+  }
+}

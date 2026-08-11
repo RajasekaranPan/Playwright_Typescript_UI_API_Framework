@@ -1,0 +1,18 @@
+import { expect } from "@playwright/test";
+import { test } from "../fixtures/hooks-fixtures";
+
+test.describe('Global login setup and fixtures tests example',() => {
+
+// test.use({
+//     storageState: "playwright/.auth/globalStorageState.json"
+//   });
+
+test('Validate Login and goto Support page', async ({beforeAfterHook, userProfileMenu}) => {
+    //goToUrl fixture will navigate to the OrangeHRM login page 
+    //and login to the application using the credentials from environment variables
+    await userProfileMenu.clickOnHamburgerMenu();
+    await userProfileMenu.clickOnSupportLink();
+    await expect(userProfileMenu.page).toHaveURL(/support/);
+})
+
+});
