@@ -1,6 +1,8 @@
 import {test as base} from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { UserProfileMenu } from "../sections/UserProfileMenu";
+import { LeftNavigationItems } from "../sections/LeftNavigationItems";
+import { PersonalDetailsPage } from "../pages/PersonalDetailsPage";
 
 /**
  * Fixture for page object model. 
@@ -24,6 +26,8 @@ import { UserProfileMenu } from "../sections/UserProfileMenu";
 type MyFixtures = {
     loginPage: LoginPage;
     userProfileMenu: UserProfileMenu;
+    leftNavigationItems: LeftNavigationItems;
+    personalDetailsPage: PersonalDetailsPage;
 }   
 
 const test = base.extend<MyFixtures>({
@@ -33,8 +37,15 @@ const test = base.extend<MyFixtures>({
 
     userProfileMenu: async ({page}, use) => {
         await use(new UserProfileMenu(page));
-    }
+    },
+
+    leftNavigationItems: async ({page}, use) => {
+        await use(new LeftNavigationItems(page));
+    },
     
+    personalDetailsPage: async({page}, use) => {
+        await use(new PersonalDetailsPage(page));
+    }
 });
 
 export { test };

@@ -1,7 +1,8 @@
-import {test as base} from "../fixtures/common-fixtures";
+import {test as base} from "../fixtures/credentials-fixtures";
 
 type Hooks = {
-    beforeAfterHook: void;
+    beforeAfterHook: void; // Just load the URL at the begining 
+    // and Logout after every test ends.
 }
 
 const test = base.extend<Hooks>({

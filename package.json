@@ -7,6 +7,9 @@
     "comment": "the below command to run tests in headed mode with HTML report generation",
     "test:qa:hd:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed",
     "test:qa:headless:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --reporter=html --config=playwright.config.ts",
+    "test:qa:infisicial": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test tests/infisical_excel_testdata/testdataDrivenTest.spec.ts --project=chromium --headed --grep=@Infisicial",
+    "test:qa:visualTesting": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed --grep=@VisualTesting",
+    "test:qa:lastfailed": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed --grep=@UI --last-failed",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
     "test:report:open": "npx playwright show-report --project=chromium",
@@ -23,12 +26,15 @@
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/crypto-js": "^4.2.2",
-    "@types/node": "^26.2.0"
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.5.0",
     "cross-env": "^10.1.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^17.4.2",
+    "ibm_db": "^4.0.1",
     "xlsx": "^0.18.5"
   }
 }

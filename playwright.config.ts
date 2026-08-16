@@ -19,8 +19,8 @@ dotenv.config(
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests/infisical_excel_testdata',
-  testMatch: ['**/*.spec.ts'],
+  testDir: './tests',
+  testMatch: ['**/personalDetailsTest.spec.ts'],
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -32,8 +32,12 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html',{open: 'always'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout: 30_000,
+  timeout: 60_000,
 
+  expect: 
+  {
+    timeout: 30000,
+  },
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
@@ -56,9 +60,9 @@ export default defineConfig({
   {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], 
-      storageState: 'playwright/.auth/globalStorageState.json'
+      //storageState: 'playwright/.auth/globalStorageState.json'
        },
-     dependencies: ['setup'],
+   //  dependencies: ['setup'],
     },
 
     {

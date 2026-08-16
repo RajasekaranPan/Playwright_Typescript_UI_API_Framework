@@ -34,6 +34,37 @@ CredentialsManager
       ▼
 Playwright
 
+
+#### Test Data needs
+
+Excel
+  │
+  │  Existing employees
+  │
+  ▼
+EmployeeDataProvider
+  │
+  │  Select employee according to scenario
+  ▼
+Selected Employee
+  │
+  ├── maritalStatus
+  ├── DOB / age
+  ├── employee ID
+  └── ...
+          │
+          ▼
+    DependentDataFactory
+          │
+          │ @faker-js/faker
+          ▼
+    Generated dependent
+          │
+          ▼
+    JSON
+    └── future verification
+
+    
 ## 1. Prerequisites
 
 Project:

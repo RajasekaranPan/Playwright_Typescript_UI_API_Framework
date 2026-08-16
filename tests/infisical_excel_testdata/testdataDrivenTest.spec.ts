@@ -19,7 +19,9 @@ import { LoginTestData } from '../../types/LoginTestData';
 import {CredentialsManager} from '../../utils/CredentialsManager'
 import { EnvironmentManager } from '../../utils/EnvironmentManager';
 
-test.describe('Testdata driven testing',() => {
+test.describe('Testdata driven testing',{tag: ['@Regression'],
+    annotation: [{type:"Story", description: "www.jira.com/story"}]
+},() => {
 
 const loginData: LoginTestData[] = TestDataLoader.getLoginData();
 
@@ -41,13 +43,31 @@ const loginData: LoginTestData[] = TestDataLoader.getLoginData();
 // Vault
 // CI secret
 
+
 loginData.forEach(data => {
 
+    test.use({
+        storageState: {
+            cookies: [],
+            origins: []
+    }});
+
     test(`${data.Scenario} - USER: ${data.UsernameKey}`,
-        {tag: ['@login', '@regression']},
+       
+    {tag: ['@EndToEnd', '@UAT', '@TestDataExcelToJson', '@Infisicial'],
+    annotation: [{
+        type: "Test Case Link",
+        description: "https:jira.com/"
+    },
+    {type: "Defect",
+        description: "https:jira.com/defects"
+    }]
+    },
      async ({page, commonUtils, loginPage, userProfileMenu}) => {
         
+        await test.step('Navigate to Orange HRM Login Page', async() => {
         await loginPage.goToOrangeHRMLoginPage(EnvironmentManager.getBaseUrl());
+        });
 
         const credentials = CredentialsManager.getCredentials(
             data.UsernameKey, data.PasswordKey );
@@ -55,15 +75,21 @@ loginData.forEach(data => {
             let decryptedUserName = commonUtils.decryptData(credentials.username);
             let decryptedPassword = commonUtils.decryptData(credentials.password);
 
-        await loginPage.loginToOrangeHRM(decryptedUserName, decryptedPassword);
+        await test.step('Login into Orange HRM using valid credentials', async() => {
+            await loginPage.loginToOrangeHRM(decryptedUserName, decryptedPassword);
+        });
 
+         await test.step('Validate user is able to login into Orange HRM', async() => {
          if (data.ExpectedResult === 'success') {
-                await expect(page).toHaveURL(/dashboard/);
+                await expect(page).toHaveURL(url => {
+                    return url.toString().includes("dashboard");
+                });
             } else {
                 await expect(
                     page.getByText('Invalid credentials')
                 ).toBeVisible();
             }
+        });
     });
     
 });

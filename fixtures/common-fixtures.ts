@@ -1,11 +1,11 @@
 import {test as base} from "../fixtures/pom-fixtures"
 import CommonUtils from "../utils/CommonUtils";
 
-type commonUtilsFixture = {
+type CommonUtilsFixture = {
     commonUtils: CommonUtils;
 }   
 
-const test = base.extend<commonUtilsFixture>({
+const test = base.extend<CommonUtilsFixture>({
     commonUtils: async ({}, use) => {    
         await use(new CommonUtils());
     }

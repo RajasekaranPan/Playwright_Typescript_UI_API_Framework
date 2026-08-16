@@ -32,7 +32,16 @@ test.beforeEach(async ({commonUtils, loginPage}) => {
     expect(loginPage.page).toHaveURL(/dashboard/);
 });
 
-test('Validate Login and goto Support page', async ({ userProfileMenu}) => {
+test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
+    annotation: [{
+        type: "Test Case Link",
+        description: "https:jira.com/"
+    },
+    {type: "Defect",
+        description: "https:jira.com/defects"
+    }]
+    },
+    async ({ userProfileMenu}) => {
     await userProfileMenu.clickOnHamburgerMenu();
     await userProfileMenu.clickOnSupportLink();
     await expect(userProfileMenu.page).toHaveURL(/support/);

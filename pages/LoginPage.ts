@@ -1,14 +1,16 @@
 import { Locator, Page } from "@playwright/test";
+import { PlaywrightActions } from "../core/playwright/PlaywrightActions";
+import { BasePage } from "../core/BasePage";
 
-export class LoginPage
+export class LoginPage extends BasePage
 {
-    readonly page: Page;
     readonly userNameInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
+  
     constructor(page: Page)
     {
-        this.page = page;
+        super(page);
         this.userNameInput = page.getByRole('textbox', { name: 'Username' })
         this.passwordInput = page.getByRole('textbox', { name: 'Password' })
         this.loginButton = page.getByRole('button', { name: 'Login' })
@@ -19,7 +21,7 @@ export class LoginPage
      */
     async goToOrangeHRMLoginPage(url: string)
     {
-        await this.page.goto(url, 
+        await this.actions.navigation.goto(url, 
             { waitUntil: 'domcontentloaded' }
         );
     }
@@ -31,8 +33,8 @@ export class LoginPage
      */
     async loginToOrangeHRM(username: string, password: string)
     {
-        await this.userNameInput.fill(username);
-        await this.passwordInput.fill(password);
-        await this.loginButton.click();
+        await this.actions.fill(this.userNameInput, username);
+        await this.actions.fill(this.passwordInput, password);
+        await this.actions.click(this.loginButton);
     }
 }

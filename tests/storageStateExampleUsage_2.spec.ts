@@ -7,7 +7,16 @@ test.describe('Global login setup and fixtures tests example',() => {
 //     storageState: "playwright/.auth/globalStorageState.json"
 //   });
 
-test('Validate Login and goto Support page', async ({beforeAfterHook, userProfileMenu}) => {
+test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
+    annotation: [{
+        type: "Test Case Link",
+        description: "https:jira.com/"
+    },
+    {type: "Defect",
+        description: "https:jira.com/defects"
+    }]
+    },
+    async ({beforeAfterHook, userProfileMenu}) => {
     //goToUrl fixture will navigate to the OrangeHRM login page 
     //and login to the application using the credentials from environment variables
     await userProfileMenu.clickOnHamburgerMenu();

@@ -28,7 +28,16 @@ test.describe('Global login and test hooks example',() => {
     await expect(userProfileMenu.page).toHaveURL(/auth/);
   });
 
-test('Validate Login and goto Support page', async ({commonUtils, loginPage, userProfileMenu}) => {
+test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
+    annotation: [{
+        type: "Test Case Link",
+        description: "https:jira.com/"
+    },
+    {type: "Defect",
+        description: "https:jira.com/defects"
+    }]
+    },
+    async ({commonUtils, loginPage, userProfileMenu}) => {
     await userProfileMenu.clickOnHamburgerMenu();
     await userProfileMenu.clickOnSupportLink();
     await expect(userProfileMenu.page).toHaveURL(/support/);
