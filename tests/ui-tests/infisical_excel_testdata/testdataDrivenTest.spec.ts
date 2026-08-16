@@ -1,12 +1,12 @@
-import { test } from '../../fixtures/hooks-fixtures';
+import { test } from '../../../fixtures/hooks-fixtures';
 import { expect } from '@playwright/test';
 //import loginData from '../../data/json/orangeHRM.json';
 // We generate JSON file from Excel file using TestDataLoader class just for reference. We are not using the JSON file directly in the test. 
 // Instead, we are using the TestDataLoader class to load the data from the Excel file and use it in the test. 
 // This approach ensures that we always have the latest data from the Excel file and we don't have to manually update the JSON file whenever the Excel file changes.
 
-import { TestDataLoader } from '../../utils/TestDataLoader';
-import { LoginTestData } from '../../types/LoginTestData';
+import { TestDataLoader } from '../../../utils/TestDataLoader';
+import { LoginTestData } from '../../../types/LoginTestData';
 //Best Approach:  Excel -> Parser -> JS Typed object -> Tests
 // Reason for not importing the JSON file directly:
 // 1. Type Safety: By using a loader function, you can define TypeScript interfaces or types for your test data. This ensures that the data being loaded adheres to the expected structure, providing type safety and reducing the risk of runtime errors.
@@ -16,8 +16,8 @@ import { LoginTestData } from '../../types/LoginTestData';
 // 5. Reusability: A loader function can be reused across multiple test files or test suites, promoting code reuse and reducing duplication. This can be especially beneficial in larger test projects with multiple test cases that rely on the same data.
 // 6. Error Handling: A loader function can include error handling mechanisms to gracefully handle issues that may arise during data loading, such as missing files or invalid data formats. This can help prevent test failures due to data-related issues.
 
-import {CredentialsManager} from '../../utils/CredentialsManager'
-import { EnvironmentManager } from '../../utils/EnvironmentManager';
+import {CredentialsManager} from '../../../utils/CredentialsManager'
+import { EnvironmentManager } from '../../../utils/EnvironmentManager';
 
 test.describe('Testdata driven testing',{tag: ['@Regression'],
     annotation: [{type:"Story", description: "www.jira.com/story"}]

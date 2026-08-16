@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { Db2Queries } from '../../utils/DatabaseUtils/Db2Queries'
+import { Db2Queries } from '../../../utils/DatabaseUtils/Db2Queries'
 
 
 // NOTE: It wont wprk as DB credentials are just imaginary ones.

@@ -2,10 +2,10 @@ import { test } from '@playwright/test';
 
 import {
     ScenarioDataFactory
-} from '../../utils/TestDataUtilities/ScenarioDataFactory';
+} from '../../../utils/TestDataUtilities/ScenarioDataFactory';
 import {
     JsonDataWriter
-} from '../../utils/TestDataUtilities/JsonDataWriter';
+} from '../../../utils/TestDataUtilities/JsonDataWriter';
 
 test(
     'Create dependent for 401(k) catch-up employee',

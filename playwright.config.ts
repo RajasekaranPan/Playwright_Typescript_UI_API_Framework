@@ -20,7 +20,7 @@ dotenv.config(
  */
 export default defineConfig({
   testDir: './tests',
-  testMatch: ['**/personalDetailsTest.spec.ts'],
+  testMatch: ['**/*.spec.ts'],
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -44,15 +44,20 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     headless: false,
-    viewport: { width: 1280, height: 720 },
+    //viewport: { width: 1280, height: 720 },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    trace: 'retain-on-failure',
-    browserName: 'chromium',
+    trace: 'on'
+    //browserName: 'chromium',
   },
 
   /* Configure projects for major browsers */
   projects: [
+    
+    {
+      name: 'api-test',
+      testMatch: '**/apitests/**/*.spec.ts',
+    },
     {
       name: 'setup',
       testMatch: 'global.setup.ts',
@@ -60,20 +65,20 @@ export default defineConfig({
   {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], 
-      //storageState: 'playwright/.auth/globalStorageState.json'
+      storageState: 'playwright/.auth/globalStorageState.json'
        },
-   //  dependencies: ['setup'],
+      dependencies: ['setup'],
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {

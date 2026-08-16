@@ -1,4 +1,4 @@
-import {test} from '../../fixtures/hooks-fixtures';
+import {test} from '../../../fixtures/hooks-fixtures';
 
 test('Upload and Download functionalities', {}, async({decryptedValidCredentials, loginPage, leftNavigationItems, personalDetailsPage}) => {
 
