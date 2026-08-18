@@ -27,7 +27,26 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      
+      - name: Debug GitHub OIDC claims
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const token = await core.getIDToken();
+            const payload = JSON.parse(
+              Buffer.from(token.split('.')[1], 'base64url').toString()
+            );
 
+            console.log('OIDC issuer:', payload.iss);
+            console.log('OIDC audience:', payload.aud);
+            console.log('OIDC subject:', payload.sub);
+            console.log('Repository:', payload.repository);
+            console.log('Repository ID:', payload.repository_id);
+            console.log('Repository owner:', payload.repository_owner);
+            console.log('Repository owner ID:', payload.repository_owner_id);
+            console.log('Event:', payload.event_name);
+            console.log('Ref:', payload.ref);
+            
       - name: Install dependencies
         run: npm ci
 
