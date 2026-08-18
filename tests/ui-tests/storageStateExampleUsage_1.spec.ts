@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/common-fixtures";
+import { test } from "../../fixtures/common-fixtures";
 
 test.describe('Global login and test hooks example',() => {
 
@@ -16,16 +16,16 @@ test.describe('Global login and test hooks example',() => {
 //     storageState: "playwright/.auth/globalStorageState.json"
 //   });
 
-  test.beforeEach(async ({loginPage}) => {
+  test.beforeEach(async ({page, loginPage}) => {
     let url = process.env.BASE_URL as string;
     await loginPage.goToOrangeHRMLoginPage(url);
-    await expect(loginPage.page).toHaveURL(/dashboard/);
+    await expect(page).toHaveURL(/dashboard/);
   });
 
-  test.afterEach(async ({userProfileMenu}) => {
+  test.afterEach(async ({page, userProfileMenu}) => {
      await userProfileMenu.clickOnHamburgerMenu();
     await userProfileMenu.clickLogoutLink();
-    await expect(userProfileMenu.page).toHaveURL(/auth/);
+    await expect(page).toHaveURL(/auth/);
   });
 
 test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
@@ -37,10 +37,10 @@ test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
         description: "https:jira.com/defects"
     }]
     },
-    async ({commonUtils, loginPage, userProfileMenu}) => {
+    async ({page, userProfileMenu}) => {
     await userProfileMenu.clickOnHamburgerMenu();
     await userProfileMenu.clickOnSupportLink();
-    await expect(userProfileMenu.page).toHaveURL(/support/);
+    await expect(page).toHaveURL(/support/);
 })
 
 });
