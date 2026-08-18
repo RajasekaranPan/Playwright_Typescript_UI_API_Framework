@@ -20,8 +20,7 @@ dotenv.config(
  */
 export default defineConfig({
   testDir: './tests',
-  testMatch: ['**/orangehrm-wiremock.spec.ts'],
-  testIgnore: ['**/orangehrm-wiremock.spec.ts', '**/netWorkInterceptorAndMocking.spec.ts'],
+  testMatch: ['**/*.spec.ts'],
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -68,6 +67,7 @@ export default defineConfig({
     },
   {
       name: 'chromium',
+      testMatch: '**/ui-tests/**/*.spec.ts',
       use: { ...devices['Desktop Chrome'], 
       storageState: 'playwright/.auth/globalStorageState.json'
        },
