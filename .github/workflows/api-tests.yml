@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
@@ -38,14 +38,13 @@ jobs:
         uses: Infisical/secrets-action@v1.0.9
         with:
           method: oidc
-          identity-id: YOUR_MACHINE_IDENTITY_ID
+          identity-id: dda74f33-1690-4391-b15b-fe2eff455218
           domain: https://app.infisical.com
           env-slug: qa
-          project-slug: YOUR_PROJECT_SLUG
+          project-slug: playwright-github-actions
 
       - name: Run API Tests
-        run: |
-          npx playwright test tests/apiTests
+        run: npx playwright test tests/apiTests
 
       - name: Upload API Playwright Report
         if: always()
