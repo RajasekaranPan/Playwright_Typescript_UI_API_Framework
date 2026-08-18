@@ -1,0 +1,33 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/web/index.php/api/v2/pim/employees",
+    "queryParameters": {
+      "limit": {
+        "equalTo": "50"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "data": [
+        {
+          "id": 88888,
+          "employeeId": "SV002",
+          "firstName": "Query",
+          "middleName": "",
+          "lastName": "Matched",
+          "terminationId": null
+        }
+      ],
+      "meta": {
+        "total": 1
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
-import { test } from '../../fixtures/hooks-fixtures';
+import { test } from '../../../fixtures/hooks-fixtures';
 import {expect} from '@playwright/test'; 
-import { EnvironmentManager } from '../../utils/EnvironmentManager';
-import { EmployeeListPage } from '../../pages/EmployeeListsPage';
+import { EnvironmentManager } from '../../../utils/EnvironmentManager';
+import { EmployeeListPage } from '../../../pages/EmployeeListsPage';
 
 
 test.describe('Playwright Special Feature',{tag: ['@Regression'],

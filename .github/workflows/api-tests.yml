@@ -1,0 +1,68 @@
+name: API Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  api-tests:
+    name: Run API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Infisical CLI
+        run: |
+          curl -1sLf \
+            'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' \
+            | sudo -E bash
+          sudo apt-get update
+          sudo apt-get install -y infisical
+
+      - name: Authenticate with Infisical
+        run: |
+          infisical login \
+            --method=oidc \
+            --domain=https://app.infisical.com
+
+      - name: Run API Tests
+        run: |
+          infisical run \
+            --env=qa \
+            -- npx playwright test tests/apiTests
+
+      - name: Upload API Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: Upload API Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-results
+          path: test-results/
+          retention-days: 7

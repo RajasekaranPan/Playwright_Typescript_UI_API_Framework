@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/web/index.php/api/v2/pim/employees"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "data": [
+        {
+          "id": 99999,
+          "employeeId": "SV001",
+          "firstName": "Stubbed",
+          "middleName": "",
+          "lastName": "Employee",
+          "terminationId": null
+        }
+      ],
+      "meta": {
+        "total": 1
+      }
+    }
+  }
+}

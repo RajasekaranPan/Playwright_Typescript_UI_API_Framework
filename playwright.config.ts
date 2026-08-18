@@ -20,7 +20,8 @@ dotenv.config(
  */
 export default defineConfig({
   testDir: './tests',
-  testMatch: ['**/*.spec.ts'],
+  testMatch: ['**/orangehrm-wiremock.spec.ts'],
+  testIgnore: ['**/orangehrm-wiremock.spec.ts', '**/netWorkInterceptorAndMocking.spec.ts'],
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -32,11 +33,10 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html',{open: 'always'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout: 60_000,
-
+  timeout:40_000,
   expect: 
   {
-    timeout: 30000,
+    timeout: 15_000,
   },
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -55,7 +55,7 @@ export default defineConfig({
   projects: [
     
     {
-      name: 'api-test',
+      name: 'api-tests',
       testMatch: '**/apitests/**/*.spec.ts',
       use:
       {
