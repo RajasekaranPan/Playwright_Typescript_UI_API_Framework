@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/common-fixtures";
+import { test } from "../../fixtures/common-fixtures";
 
 /**
  * Run this test file using the command: 
@@ -19,7 +19,7 @@ test.describe('Without fixtures but with hooks tests example',() => {
     }});
 
     
-test.beforeEach(async ({commonUtils, loginPage}) => {
+test.beforeEach(async ({page,commonUtils, loginPage}) => {
     let url = process.env.BASE_URL as string;
     let encryptedUsernameFromEnv = process.env.ORG_HRM_USR_NAME as string;
     let encryptedPasswordFromEnv = process.env.ORG_HRM_PASSWORD as string;
@@ -29,7 +29,7 @@ test.beforeEach(async ({commonUtils, loginPage}) => {
     console.log(`Decrypted Password: ${decryptedPassword}`);
     await loginPage.goToOrangeHRMLoginPage(url);
     await loginPage.loginToOrangeHRM(decryptedUsername, decryptedPassword);
-    expect(loginPage.page).toHaveURL(/dashboard/);
+    expect(page).toHaveURL(/dashboard/);
 });
 
 test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
@@ -41,10 +41,10 @@ test('Validate Login and goto Support page', {tag: ['@login', '@UAT', '@UI'],
         description: "https:jira.com/defects"
     }]
     },
-    async ({ userProfileMenu}) => {
+    async ({ page, userProfileMenu}) => {
     await userProfileMenu.clickOnHamburgerMenu();
     await userProfileMenu.clickOnSupportLink();
-    await expect(userProfileMenu.page).toHaveURL(/support/);
+    await expect(page).toHaveURL(/support/);
 })
 
 test('Validate Login and check if Logout link is present', async ({page, userProfileMenu}) => {
@@ -57,7 +57,7 @@ test.afterEach(async ({page, userProfileMenu}) => {
     // Logout after each test to ensure a clean state for the next test
     await userProfileMenu.clickOnHamburgerMenu();
     await userProfileMenu.clickLogoutLink();
-    await expect(userProfileMenu.page).toHaveURL(/auth/);
+    await expect(page).toHaveURL(/auth/);
 });
 
 });
