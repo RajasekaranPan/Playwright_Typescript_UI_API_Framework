@@ -60,7 +60,7 @@ jobs:
           identity-id: dda74f33-1690-4391-b15b-fe2eff455218
           domain: https://app.infisical.com
           env-slug: qa
-          project-slug: playwright-github-actions
+          project-slug: playwright-automation-1d-oy
 
       - name: Run API Tests
         run: npx playwright test tests/apiTests
