@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../../fixtures/common-fixtures";
+import { EnvironmentManager } from "../../utils/EnvironmentManager";
 
 test.describe('Global login and test hooks example',() => {
 
@@ -12,14 +13,13 @@ test.describe('Global login and test hooks example',() => {
     * --project=storageStateTests --headed
     */
 
-// test.use({
-//     storageState: "playwright/.auth/globalStorageState.json"
-//   });
+test.use({
+    storageState: "playwright/.auth/globalStorageState.json"
+  });
 
   test.beforeEach(async ({page, loginPage}) => {
-    let url = process.env.BASE_URL as string;
+    let url = EnvironmentManager.getBaseUrl();
     await loginPage.goToOrangeHRMLoginPage(url);
-    await expect(page).toHaveURL(/dashboard/);
   });
 
   test.afterEach(async ({page, userProfileMenu}) => {

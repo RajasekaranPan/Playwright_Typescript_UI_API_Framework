@@ -1,4 +1,4 @@
-# PlaywrightWithTypescript - WishInfiniteYoutube
+# PlaywrightWithTypescript
 
 ## 🚀 Project Overview & Architecture
 
@@ -32,7 +32,7 @@ This is a **production-grade, enterprise-scale Playwright TypeScript test automa
 ## 📁 Folder & Directory Structure
 
 ```
-PlaywrightWithTypescript_WishInfiniteYoutube/
+PlaywrightWithTypescript/
 │
 ├── 📄 README.md                          # Project documentation and onboarding guide
 ├── 📄 package.json                       # NPM dependencies and test scripts
@@ -160,7 +160,7 @@ PlaywrightWithTypescript_WishInfiniteYoutube/
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd PlaywrightWithTypescript_WishInfiniteYoutube
+cd PlaywrightWithTypescript
 
 # Install Node.js dependencies
 npm install

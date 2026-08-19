@@ -70,7 +70,7 @@ Selected Employee
 Project:
 
 ```text
-D:\Handson\PlaywrightWithTypescript_WishInfiniteYoutube
+D:\Handson\PlaywrightWithTypescript
 ```
 
 Infisical project:
@@ -294,7 +294,7 @@ Do not create a CI/CD Machine Identity yet. That will be used later for GitHub A
 From the Playwright project root:
 
 ```powershell
-cd D:\Handson\PlaywrightWithTypescript_WishInfiniteYoutube
+cd D:\Handson\PlaywrightWithTypescript
 ```
 
 Initialize Infisical:
@@ -353,7 +353,7 @@ infisical export --env=qa --output-file=.env.qa
 Expected project structure:
 
 ```text
-PlaywrightWithTypescript_WishInfiniteYoutube/
+PlaywrightWithTypescript/
 │
 ├── .env.qa
 ├── .infisical.json

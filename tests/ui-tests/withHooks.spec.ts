@@ -21,8 +21,8 @@ test.describe('Without fixtures but with hooks tests example',() => {
     
 test.beforeEach(async ({page,commonUtils, loginPage}) => {
     let url = process.env.BASE_URL as string;
-    let encryptedUsernameFromEnv = process.env.ORG_HRM_USR_NAME as string;
-    let encryptedPasswordFromEnv = process.env.ORG_HRM_PASSWORD as string;
+    let encryptedUsernameFromEnv = process.env.VALID_USERNAME as string;
+    let encryptedPasswordFromEnv = process.env.INVALID_USERNAME as string;
     let decryptedUsername = commonUtils.decryptData(encryptedUsernameFromEnv);
     let decryptedPassword = commonUtils.decryptData(encryptedPasswordFromEnv);
     console.log(`Decrypted Username: ${decryptedUsername}`);

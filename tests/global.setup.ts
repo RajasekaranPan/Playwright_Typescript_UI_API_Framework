@@ -1,16 +1,15 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/common-fixtures";
+import { test } from "../fixtures/hooks-fixtures";
+import de from "zod/v4/locales/de.js";
 
-test('Global Setup (Auth storage state) for Auto Login',async ({page,commonUtils, loginPage}) => {
+test('Global Setup (Auth storage state) for Auto Login',async ({page, decryptedValidCredentials, commonUtils, loginPage}) => {
     let url = process.env.BASE_URL as string;
-    let encryptedUsernameFromEnv = process.env.VALID_USERNAME as string;
-    let encryptedPasswordFromEnv = process.env.VALID_PASSWORD as string;
-    let decryptedUsername = commonUtils.decryptData(encryptedUsernameFromEnv);
-    let decryptedPassword = commonUtils.decryptData(encryptedPasswordFromEnv);
-    console.log(`Decrypted Username: ${decryptedUsername}`);
-    console.log(`Decrypted Password: ${decryptedPassword}`);
+    const app_username = decryptedValidCredentials.app_username;
+    const app_password = decryptedValidCredentials.app_password;
+    console.log(`Decrypted Username: ${decryptedValidCredentials.app_username}`);
+    console.log(`Decrypted Password: ${decryptedValidCredentials.app_password}`);
     await loginPage.goToOrangeHRMLoginPage(url);
-    await loginPage.loginToOrangeHRM(decryptedUsername, decryptedPassword);
+    await loginPage.loginToOrangeHRM(app_username, app_password);
     expect(page).toHaveURL(/dashboard/);
     await page.context().storageState({ path: './playwright/.auth/globalStorageState.json' });
 });

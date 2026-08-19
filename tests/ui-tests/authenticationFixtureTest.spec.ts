@@ -1,20 +1,23 @@
-import { test } from '../../../fixtures/hooks-fixtures';
+import { test } from '../../fixtures/hooks-fixtures';
 import {expect} from '@playwright/test'; 
-import { EnvironmentManager } from '../../../utils/EnvironmentManager';
-import { EmployeeListPage } from '../../../pages/EmployeeListsPage';
+import { EnvironmentManager } from '../../utils/EnvironmentManager';
+import { EmployeeListPage } from '../../pages/EmployeeListsPage';
 
 
-test.describe('Playwright Special Feature',{tag: ['@Regression'],
+test.describe('Authentication Fixture',{tag: ['@Regression'],
     annotation: [{type:"Story", description: "www.jira.com/story"}]
 },
 
 () => {
 
-//  test.use({
-//     storageState: "playwright/.auth/globalStorageState.json"
-//   });
+    test.use({
+        storageState: {
+            cookies: [],
+            origins: []
+    }});
 
- test('Known Failure: Network interceptor test', {tag: ['@EndToEnd','@network'],
+ test('Known Failure: Validate authenticated login fixture without global storage state', 
+    {tag: ['@EndToEnd','@network'],
     annotation: [{
         type: "Test Case Link",
         description: "https:jira.com/"
@@ -25,10 +28,6 @@ test.describe('Playwright Special Feature',{tag: ['@Regression'],
     },
      async ({page, authenticate}) => {
         
-    // await test.step('Navigate to Orange HRM Login Page followed by PIM', async() => {
-    //     await loginPage.goToOrangeHRMLoginPage(EnvironmentManager.getBaseUrl());
-    // }); 
-
      await test.step('Playwright network intercept using route and response mockup', async() => {
         // Network mocking
         await page.route(

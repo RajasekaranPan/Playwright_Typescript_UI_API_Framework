@@ -1,4 +1,4 @@
-import {test as base} from "../fixtures/credentials-fixtures";
+import {test as base} from "./authenticate-fixtures";
 
 type Hooks = {
     beforeAfterHook: void; // Just load the URL at the begining 
