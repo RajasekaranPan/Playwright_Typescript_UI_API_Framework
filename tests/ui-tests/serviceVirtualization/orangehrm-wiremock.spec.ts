@@ -70,9 +70,9 @@ test.describe('Service Virualization => Playwright Intercept + WireMock',{tag: [
   
       // Validate employee data
       expect(employees[0]).toEqual({
-          id: 'MOCK001',
-          firstName: 'Raj',
-          lastName: 'Mock'
+          id: 'SV001',
+          firstName: 'Stubbed',
+          lastName: 'Employee'
       });
 
     });
