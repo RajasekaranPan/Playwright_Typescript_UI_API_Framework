@@ -6,7 +6,7 @@
     "test:qa": "cross-env ENV_NAME=qa npx playwright test --project=chromium --config=playwright.config.ts ",
     "comment": "the below command to run tests in headed mode with HTML report generation",
     "test:qa:hd:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed",
-    "test:qa:ui-tests-headless:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --reporter=html --config=playwright.config.ts --headed",
+    "test:qa:ui-tests-headless:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --reporter=html --config=playwright.config.ts",
     "test:qa:visualTesting": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed --grep=@VisualTesting",
     "test:qa:infisicial": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test tests/ui-tests/infisical_excel_testdata/testdataDrivenTest.spec.ts --project=chromium --headed --grep=@Infisicial",
     "test:networkInterceptor": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test tests/ui-tests/networkInterceptAndMocking/netWorkInterceptorAndMocking.spec.ts --project=chromium --headed --grep=@network",
