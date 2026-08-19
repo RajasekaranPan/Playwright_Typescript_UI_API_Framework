@@ -67,7 +67,7 @@ export default defineConfig({
     },
   {
       name: 'chromium',
-      testMatch: '**/*.spec.ts', 
+      testMatch: '**/ui-tests/**/*.spec.ts', 
       use: { ...devices['Desktop Chrome'], 
       storageState: 'playwright/.auth/globalStorageState.json'
       
