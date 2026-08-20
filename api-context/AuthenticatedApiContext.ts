@@ -1,14 +1,13 @@
 import { APIRequestContext } from '@playwright/test';
 
 export class AuthenticatedApiContext {
+  readonly request: APIRequestContext;
 
-    readonly request: APIRequestContext;
+  constructor(request: APIRequestContext) {
+    this.request = request;
+  }
 
-    constructor(request: APIRequestContext) {
-        this.request = request;
-    }
-
-    async dispose(): Promise<void> {
-        await this.request.dispose();
-    }
+  async dispose(): Promise<void> {
+    await this.request.dispose();
+  }
 }

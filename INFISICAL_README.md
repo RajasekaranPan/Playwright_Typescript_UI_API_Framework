@@ -5,66 +5,64 @@ This README documents the useful commands discussed while integrating **Infisica
 #### Local script development
 
 Infisical
-   ↓
+↓
 infisical export --env=qa
-   ↓
+↓
 .env.qa
-   ↓
+↓
 dotenv
-   ↓
+↓
 process.env
 
 #### Eventually, in GitHub Actions:
 
 GitHub Actions
-      │
-      │ OIDC
-      ▼
-  Infisical
-      │
-      ▼
+│
+│ OIDC
+▼
+Infisical
+│
+▼
 Environment Variables
-      │
-      ▼
+│
+▼
 process.env
-      │
-      ▼
+│
+▼
 CredentialsManager
-      │
-      ▼
+│
+▼
 Playwright
-
 
 #### Test Data needs
 
 Excel
-  │
-  │  Existing employees
-  │
-  ▼
+│
+│ Existing employees
+│
+▼
 EmployeeDataProvider
-  │
-  │  Select employee according to scenario
-  ▼
+│
+│ Select employee according to scenario
+▼
 Selected Employee
-  │
-  ├── maritalStatus
-  ├── DOB / age
-  ├── employee ID
-  └── ...
-          │
-          ▼
-    DependentDataFactory
-          │
-          │ @faker-js/faker
-          ▼
-    Generated dependent
-          │
-          ▼
-    JSON
-    └── future verification
+│
+├── maritalStatus
+├── DOB / age
+├── employee ID
+└── ...
+│
+▼
+DependentDataFactory
+│
+│ @faker-js/faker
+▼
+Generated dependent
+│
+▼
+JSON
+└── future verification
 
-    
 ## 1. Prerequisites
 
 Project:
@@ -421,7 +419,7 @@ In `playwright.config.ts`:
 import dotenv from 'dotenv';
 
 dotenv.config({
-    path: `.env.${process.env.ENV_NAME || 'qa'}`
+  path: `.env.${process.env.ENV_NAME || 'qa'}`,
 });
 ```
 
@@ -474,15 +472,9 @@ Safe verification:
 ```typescript
 console.log('BASE_URL:', process.env.BASE_URL);
 
-console.log(
-    'VALID_USERNAME exists:',
-    Boolean(process.env.VALID_USERNAME)
-);
+console.log('VALID_USERNAME exists:', Boolean(process.env.VALID_USERNAME));
 
-console.log(
-    'VALID_PASSWORD exists:',
-    Boolean(process.env.VALID_PASSWORD)
-);
+console.log('VALID_PASSWORD exists:', Boolean(process.env.VALID_PASSWORD));
 ```
 
 Expected:
@@ -505,9 +497,9 @@ console.log(process.env.VALID_PASSWORD);
 
 Recommended Excel structure:
 
-| TestCaseId | Scenario | UsernameKey | PasswordKey | ExpectedResult |
-|---|---|---|---|---|
-| TC001 | Valid Login | VALID_USERNAME | VALID_PASSWORD | success |
+| TestCaseId | Scenario    | UsernameKey    | PasswordKey    | ExpectedResult |
+| ---------- | ----------- | -------------- | -------------- | -------------- |
+| TC001      | Valid Login | VALID_USERNAME | VALID_PASSWORD | success        |
 
 Excel contains **keys**, not actual passwords.
 
@@ -558,32 +550,23 @@ Example:
 import { Credentials } from '../types/Credentials';
 
 export class CredentialsManager {
+  static getCredentials(usernameKey: string, passwordKey: string): Credentials {
+    const username = process.env[usernameKey];
+    const password = process.env[passwordKey];
 
-    static getCredentials(
-        usernameKey: string,
-        passwordKey: string
-    ): Credentials {
-
-        const username = process.env[usernameKey];
-        const password = process.env[passwordKey];
-
-        if (!username) {
-            throw new Error(
-                `Username credential not found for key: ${usernameKey}`
-            );
-        }
-
-        if (!password) {
-            throw new Error(
-                `Password credential not found for key: ${passwordKey}`
-            );
-        }
-
-        return {
-            username,
-            password
-        };
+    if (!username) {
+      throw new Error(`Username credential not found for key: ${usernameKey}`);
     }
+
+    if (!password) {
+      throw new Error(`Password credential not found for key: ${passwordKey}`);
+    }
+
+    return {
+      username,
+      password,
+    };
+  }
 }
 ```
 

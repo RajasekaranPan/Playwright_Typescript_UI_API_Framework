@@ -5,4 +5,3 @@
     // let encryptedPassword = commonUtils.encryptData(password);
     // console.log(`Encrypted Username: ${encryptedUsername}`);
     // console.log(`Encrypted Password: ${encryptedPassword}`);
-  

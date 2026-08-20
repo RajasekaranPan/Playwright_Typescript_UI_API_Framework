@@ -1,8 +1,8 @@
 import { test } from '../../../fixtures/hooks-fixtures';
 import { expect } from '@playwright/test';
 //import loginData from '../../data/json/orangeHRM.json';
-// We generate JSON file from Excel file using TestDataLoader class just for reference. We are not using the JSON file directly in the test. 
-// Instead, we are using the TestDataLoader class to load the data from the Excel file and use it in the test. 
+// We generate JSON file from Excel file using TestDataLoader class just for reference. We are not using the JSON file directly in the test.
+// Instead, we are using the TestDataLoader class to load the data from the Excel file and use it in the test.
 // This approach ensures that we always have the latest data from the Excel file and we don't have to manually update the JSON file whenever the Excel file changes.
 
 import { TestDataLoader } from '../../../utils/TestDataLoader';
@@ -16,82 +16,78 @@ import { LoginTestData } from '../../../types/LoginTestData';
 // 5. Reusability: A loader function can be reused across multiple test files or test suites, promoting code reuse and reducing duplication. This can be especially beneficial in larger test projects with multiple test cases that rely on the same data.
 // 6. Error Handling: A loader function can include error handling mechanisms to gracefully handle issues that may arise during data loading, such as missing files or invalid data formats. This can help prevent test failures due to data-related issues.
 
-import {CredentialsManager} from '../../../utils/CredentialsManager'
+import { CredentialsManager } from '../../../utils/CredentialsManager';
 import { EnvironmentManager } from '../../../utils/EnvironmentManager';
 
-test.describe('Testdata driven testing',{tag: ['@Regression'],
-    annotation: [{type:"Story", description: "www.jira.com/story"}]
-},() => {
+test.describe(
+  'Testdata driven testing',
+  { tag: ['@Regression'], annotation: [{ type: 'Story', description: 'www.jira.com/story' }] },
+  () => {
+    const loginData: LoginTestData[] = TestDataLoader.getLoginData();
 
-const loginData: LoginTestData[] = TestDataLoader.getLoginData();
+    //Parameterization vs Fixtures:
+    //Parameterization:
+    //username
+    //password
+    //expectedResult
+    //Fixtures:
+    //Fixtures are used to set up the test environment and provide common functionality for multiple tests.
+    //loginPage
+    //userProfileMenu
 
-//Parameterization vs Fixtures:
-//Parameterization:
-//username
-//password
-//expectedResult
-//Fixtures:
-//Fixtures are used to set up the test environment and provide common functionality for multiple tests. 
-//loginPage
-//userProfileMenu
+    //Another topic - Never store real passwords in Excel
+    //Resolve credentials through
+    // Environment variable
+    // Secret manager -> study
+    // Vault
+    // CI secret
 
-
-//Another topic - Never store real passwords in Excel
-//Resolve credentials through 
-// Environment variable
-// Secret manager -> study
-// Vault
-// CI secret
-
-
-loginData.forEach(data => {
-
-    test.use({
+    loginData.forEach((data) => {
+      test.use({
         storageState: {
-            cookies: [],
-            origins: []
-    }});
+          cookies: [],
+          origins: [],
+        },
+      });
 
-    test(`${data.Scenario} - USER: ${data.UsernameKey}`,
-       
-    {tag: ['@EndToEnd', '@UAT', '@TestDataExcelToJson', '@Infisicial'],
-    annotation: [{
-        type: "Test Case Link",
-        description: "https:jira.com/"
-    },
-    {type: "Defect",
-        description: "https:jira.com/defects"
-    }]
-    },
-     async ({page, commonUtils, loginPage, userProfileMenu}) => {
-        
-        await test.step('Navigate to Orange HRM Login Page', async() => {
-        await loginPage.goToOrangeHRMLoginPage(EnvironmentManager.getBaseUrl());
-        });
+      test(
+        `${data.Scenario} - USER: ${data.UsernameKey}`,
 
-        const credentials = CredentialsManager.getCredentials(
-            data.UsernameKey, data.PasswordKey );
+        {
+          tag: ['@EndToEnd', '@UAT', '@TestDataExcelToJson', '@Infisicial'],
+          annotation: [
+            {
+              type: 'Test Case Link',
+              description: 'https:jira.com/',
+            },
+            { type: 'Defect', description: 'https:jira.com/defects' },
+          ],
+        },
+        async ({ page, commonUtils, loginPage, userProfileMenu }) => {
+          await test.step('Navigate to Orange HRM Login Page', async () => {
+            await loginPage.goToOrangeHRMLoginPage(EnvironmentManager.getBaseUrl());
+          });
 
-            let decryptedUserName = commonUtils.decryptData(credentials.username);
-            let decryptedPassword = commonUtils.decryptData(credentials.password);
+          const credentials = CredentialsManager.getCredentials(data.UsernameKey, data.PasswordKey);
 
-        await test.step('Login into Orange HRM using valid credentials', async() => {
+          let decryptedUserName = commonUtils.decryptData(credentials.username);
+          let decryptedPassword = commonUtils.decryptData(credentials.password);
+
+          await test.step('Login into Orange HRM using valid credentials', async () => {
             await loginPage.loginToOrangeHRM(decryptedUserName, decryptedPassword);
-        });
+          });
 
-         await test.step('Validate user is able to login into Orange HRM', async() => {
-         if (data.ExpectedResult === 'success') {
-                await expect(page).toHaveURL(url => {
-                    return url.toString().includes("dashboard");
-                });
+          await test.step('Validate user is able to login into Orange HRM', async () => {
+            if (data.ExpectedResult === 'success') {
+              await expect(page).toHaveURL((url) => {
+                return url.toString().includes('dashboard');
+              });
             } else {
-                await expect(
-                    page.getByText('Invalid credentials')
-                ).toBeVisible();
+              await expect(page.getByText('Invalid credentials')).toBeVisible();
             }
-        });
+          });
+        },
+      );
     });
-    
-});
-
-});
+  },
+);

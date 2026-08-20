@@ -1,102 +1,77 @@
 import { Page } from '@playwright/test';
 
 export class KeyboardActions {
+  constructor(private readonly page: Page) {}
 
-    constructor(
-        private readonly page: Page
-    ) {
-        
-    }
+  // ============================================================
+  // PRESS
+  // ============================================================
 
-    // ============================================================
-    // PRESS
-    // ============================================================
+  /**
+   * Press a keyboard key or key combination.
+   *
+   * Examples:
+   * - Enter
+   * - Escape
+   * - ArrowDown
+   * - Control+A
+   * - Control+C
+   */
+  async press(key: string): Promise<void> {
+    await this.page.keyboard.press(key);
+  }
 
-    /**
-     * Press a keyboard key or key combination.
-     *
-     * Examples:
-     * - Enter
-     * - Escape
-     * - ArrowDown
-     * - Control+A
-     * - Control+C
-     */
-    async press(
-        key: string
-    ): Promise<void> {
+  // ============================================================
+  // TYPE
+  // ============================================================
 
-        await this.page.keyboard.press(key);
-    }
+  /**
+   * Type text using keyboard events.
+   *
+   * This simulates individual keyboard input events.
+   */
+  async type(
+    text: string,
+    options?: {
+      delay?: number;
+    },
+  ): Promise<void> {
+    await this.page.keyboard.type(text, {
+      delay: options?.delay,
+    });
+  }
 
+  // ============================================================
+  // INSERT TEXT
+  // ============================================================
 
-    // ============================================================
-    // TYPE
-    // ============================================================
+  /**
+   * Insert text without generating individual
+   * keyboard events for each character.
+   */
+  async insertText(text: string): Promise<void> {
+    await this.page.keyboard.insertText(text);
+  }
 
-    /**
-     * Type text using keyboard events.
-     *
-     * This simulates individual keyboard input events.
-     */
-    async type(
-        text: string,
-        options?: {
-            delay?: number;
-        }
-    ): Promise<void> {
+  // ============================================================
+  // KEY DOWN
+  // ============================================================
 
-        await this.page.keyboard.type(
-            text,
-            {
-                delay: options?.delay
-            }
-        );
-    }
+  /**
+   * Press and hold a keyboard key.
+   */
+  async keyDown(key: string): Promise<void> {
+    await this.page.keyboard.down(key);
+  }
 
+  // ============================================================
+  // KEY UP
+  // ============================================================
 
-    // ============================================================
-    // INSERT TEXT
-    // ============================================================
-
-    /**
-     * Insert text without generating individual
-     * keyboard events for each character.
-     */
-    async insertText(
-        text: string
-    ): Promise<void> {
-
-        await this.page.keyboard.insertText(text);
-    }
-
-
-    // ============================================================
-    // KEY DOWN
-    // ============================================================
-
-    /**
-     * Press and hold a keyboard key.
-     */
-    async keyDown(
-        key: string
-    ): Promise<void> {
-
-        await this.page.keyboard.down(key);
-    }
-
-
-    // ============================================================
-    // KEY UP
-    // ============================================================
-
-    /**
-     * Release a previously pressed keyboard key.
-     */
-    async keyUp(
-        key: string
-    ): Promise<void> {
-
-        await this.page.keyboard.up(key);
-    }
+  /**
+   * Release a previously pressed keyboard key.
+   */
+  async keyUp(key: string): Promise<void> {
+    await this.page.keyboard.up(key);
+  }
 }

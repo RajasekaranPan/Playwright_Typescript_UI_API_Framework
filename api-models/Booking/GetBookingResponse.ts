@@ -3,5 +3,4 @@ import { BookingSchema } from './BookingSchema';
 
 export const GetBookingResponseSchema = BookingSchema;
 
-export type GetBookingResponse =
-    z.infer<typeof GetBookingResponseSchema>;
+export type GetBookingResponse = z.infer<typeof GetBookingResponseSchema>;

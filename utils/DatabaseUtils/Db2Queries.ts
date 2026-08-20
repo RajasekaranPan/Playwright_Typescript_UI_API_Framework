@@ -1,10 +1,8 @@
 import { Db2Connection } from './Db2Connection';
 
 export class Db2Queries {
-
-    static async getEmployeeById(employeeId: number) {
-
-        const sql = `
+  static async getEmployeeById(employeeId: number) {
+    const sql = `
             SELECT
                 EMPLOYEE_ID,
                 FIRST_NAME,
@@ -15,13 +13,11 @@ export class Db2Queries {
             WHERE EMPLOYEE_ID = ?
         `;
 
-        return await Db2Connection.query(sql, [employeeId]);
-    }
+    return await Db2Connection.query(sql, [employeeId]);
+  }
 
-
-    static async getEmployeeByEmail(email: string) {
-
-        const sql = `
+  static async getEmployeeByEmail(email: string) {
+    const sql = `
             SELECT
                 EMPLOYEE_ID,
                 FIRST_NAME,
@@ -32,15 +28,10 @@ export class Db2Queries {
             WHERE EMAIL = ?
         `;
 
-        return await Db2Connection.query(sql, [email]);
-    }
+    return await Db2Connection.query(sql, [email]);
+  }
 
-
-    static async getEmployeesUnderManager(
-    managerId: number,
-    department: string
-) {
-
+  static async getEmployeesUnderManager(managerId: number, department: string) {
     const sql = `
         SELECT
             E.EMP_ID,
@@ -54,14 +45,8 @@ export class Db2Queries {
           AND E.DEPARTMENT = ?
     `;
 
-    const parameters = [
-        managerId,
-        department
-    ];
+    const parameters = [managerId, department];
 
-    return await Db2Connection.query(
-        sql,
-        parameters
-    );
-}
+    return await Db2Connection.query(sql, parameters);
+  }
 }

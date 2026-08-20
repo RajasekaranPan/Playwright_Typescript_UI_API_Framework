@@ -1,70 +1,60 @@
 import { faker } from '@faker-js/faker';
 import { BookingSchema } from '../api-models/Booking/BookingSchema';
 
-type BookingDataOverrides =
-    Partial<Omit<BookingSchema, 'bookingdates'>> & {
-        bookingdates?: Partial<BookingSchema['bookingdates']>;
-    };
+type BookingDataOverrides = Partial<Omit<BookingSchema, 'bookingdates'>> & {
+  bookingdates?: Partial<BookingSchema['bookingdates']>;
+};
 
 export class BookingDataFactory {
+  private static readonly ADDITIONAL_NEEDS = [
+    'Breakfast',
+    'Lunch',
+    'Dinner',
+    'ACRoom',
+    'NonSmokingRoom',
+    'Pet Free',
+  ];
 
-    private static readonly ADDITIONAL_NEEDS = [
-        'Breakfast',
-        'Lunch',
-        'Dinner',
-        'ACRoom',
-        'NonSmokingRoom',
-        'Pet Free'
-    ];
+  private static formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
+  }
 
-    private static formatDate(date: Date): string {
-        return date.toISOString().split('T')[0];
-    }
+  public static createBooking(overrides: BookingDataOverrides = {}): BookingSchema {
+    const checkinDate = faker.date.soon({
+      days: 180,
+    });
 
-    public static createBooking(
-        overrides: BookingDataOverrides = {}
-    ): BookingSchema {
+    const checkoutDate = new Date(checkinDate);
 
-        const checkinDate = faker.date.soon({
-            days: 180
-        });
+    checkoutDate.setDate(checkoutDate.getDate() + faker.number.int({ min: 1, max: 14 }));
 
-        const checkoutDate = new Date(checkinDate);
+    const defaultBooking: BookingSchema = {
+      firstname: faker.person.firstName(),
+      lastname: faker.person.lastName(),
 
-        checkoutDate.setDate(
-            checkoutDate.getDate() +
-            faker.number.int({ min: 1, max: 14 })
-        );
+      totalprice: faker.number.int({
+        min: 100,
+        max: 5000,
+      }),
 
-        const defaultBooking: BookingSchema = {
-            firstname: faker.person.firstName(),
-            lastname: faker.person.lastName(),
+      depositpaid: faker.datatype.boolean(),
 
-            totalprice: faker.number.int({
-                min: 100,
-                max: 5000
-            }),
+      bookingdates: {
+        checkin: this.formatDate(checkinDate),
+        checkout: this.formatDate(checkoutDate),
+      },
 
-            depositpaid: faker.datatype.boolean(),
+      additionalneeds: faker.helpers.arrayElement(this.ADDITIONAL_NEEDS),
+    };
 
-            bookingdates: {
-                checkin: this.formatDate(checkinDate),
-                checkout: this.formatDate(checkoutDate)
-            },
+    return {
+      ...defaultBooking,
+      ...overrides,
 
-            additionalneeds: faker.helpers.arrayElement(
-                this.ADDITIONAL_NEEDS
-            )
-        };
-
-        return {
-            ...defaultBooking,
-            ...overrides,
-
-            bookingdates: {
-                ...defaultBooking.bookingdates,
-                ...overrides.bookingdates
-            }
-        };
-    }
+      bookingdates: {
+        ...defaultBooking.bookingdates,
+        ...overrides.bookingdates,
+      },
+    };
+  }
 }

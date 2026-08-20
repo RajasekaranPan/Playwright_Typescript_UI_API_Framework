@@ -1,5 +1,5 @@
 export interface EnvironmentConfig {
-    environment: string;
-    baseUrl: string;
-    apiBaseUrl: string;
+  environment: string;
+  baseUrl: string;
+  apiBaseUrl: string;
 }

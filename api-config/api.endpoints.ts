@@ -1,8 +1,8 @@
 export const ApiRoutes = {
-    auth: '/auth',
+  auth: '/auth',
 
-    booking: {
-        base: '/booking',
-        byId: (bookingId: number) => `/booking/${bookingId}`
-    }
+  booking: {
+    base: '/booking',
+    byId: (bookingId: number) => `/booking/${bookingId}`,
+  },
 } as const;

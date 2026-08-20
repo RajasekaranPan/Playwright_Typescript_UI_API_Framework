@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+
+     "format": "prettier --write .",
+  "format:check": "prettier --check .",
+
+   "typecheck": "tsc --noEmit",
+   
     "test:qa": "cross-env ENV_NAME=qa npx playwright test --project=chromium --config=playwright.config.ts ",
     "comment": "the below command to run tests in headed mode with HTML report generation",
     "test:qa:hd:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed",
@@ -11,7 +17,7 @@
     "test:qa:infisicial": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test tests/ui-tests/infisical_excel_testdata/testdataDrivenTest.spec.ts --project=chromium --headed --grep=@Infisicial",
     "test:networkInterceptor": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test tests/ui-tests/networkInterceptAndMocking/netWorkInterceptorAndMocking.spec.ts --project=chromium --headed --grep=@network",
     "test:wiremock": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test tests/ui-tests/serviceVirtualization/orangehrm-wiremock.spec.ts --project=chromium --headed --grep=@network",
-    "test:qa:api-testing":  "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=api-tests --reporter=html --config=playwright.config.ts",
+    "test:qa:api-testing": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=api-tests --reporter=html --config=playwright.config.ts",
     "test:qa:lastfailed": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed --grep=@UI --last-failed",
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
@@ -30,6 +36,8 @@
     "@playwright/test": "^1.62.1",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^26.2.0",
+    "eslint": "^10.8.1",
+    "prettier": "^3.9.6",
     "typescript": "^7.0.2"
   },
   "dependencies": {

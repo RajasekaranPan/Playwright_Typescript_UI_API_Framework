@@ -14,12 +14,12 @@ PlaywrightActions
 ├── isEnabled()
 │
 ├── navigation → NavigationActions
-├── wait       → WaitActions
-├── keyboard   → KeyboardActions
-├── mouse      → MouseActions
-├── dialog     → DialogActions
-├── frame      → FrameActions
-└── file       → FileActions
+├── wait → WaitActions
+├── keyboard → KeyboardActions
+├── mouse → MouseActions
+├── dialog → DialogActions
+├── frame → FrameActions
+└── file → FileActions
 
 ### Navigation Actions:
 
@@ -35,7 +35,6 @@ PlaywrightActions
 | **Navigation events**       | `waitForNavigation`                                     |
 | **Page lifecycle**          | `isClosed`                                              |
 
-
 WaitActions
 │
 ├── forVisible()
@@ -47,8 +46,8 @@ WaitActions
 ├── forUrl()
 └── forLoadState()
 
-
 ### Keyboard Actions
+
 KeyboardActions
 │
 ├── press()
@@ -58,6 +57,7 @@ KeyboardActions
 └── keyUp()
 
 ### Mouse Actions
+
 | Method          | Purpose                     | Frequency  |
 | --------------- | --------------------------- | ---------- |
 | `click()`       | Click at coordinates        | Medium     |
@@ -66,7 +66,6 @@ KeyboardActions
 | `down()`        | Press and hold mouse button | Low        |
 | `up()`          | Release mouse button        | Low        |
 | `wheel()`       | Mouse-wheel scrolling       | Medium     |
-
 
 <!-- The important distinction is:
 
@@ -87,8 +86,8 @@ uploadFile()
 This will probably be your most frequently used method.
 
 await this.actions.file.uploadFile(
-    this.resumeInput,
-    'data/files/resume.pdf'
+this.resumeInput,
+'data/files/resume.pdf'
 );
 
 Internally:
@@ -102,13 +101,12 @@ Playwright handles the actual file-input interaction.
 Useful for multi-file upload controls.
 
 await this.actions.file.uploadFiles(
-    this.attachmentsInput,
-    [
-        'data/files/file1.pdf',
-        'data/files/file2.pdf'
-    ]
+this.attachmentsInput,
+[
+'data/files/file1.pdf',
+'data/files/file2.pdf'
+]
 );
-
 
 3. uploadUsingChooser()
 
@@ -117,20 +115,20 @@ Some applications don't expose the <input type="file"> directly.
 For example:
 
 Click Upload
-      ↓
+↓
 Native File Chooser
-      ↓
+↓
 Select File
 
 Then:
 
 await this.actions.file.uploadUsingChooser(
-    async () => {
-        await this.actions.click(
-            this.uploadButton
-        );
-    },
-    'data/files/document.pdf'
+async () => {
+await this.actions.click(
+this.uploadButton
+);
+},
+'data/files/document.pdf'
 );
 
 Internally it uses:
@@ -139,24 +137,23 @@ page.waitForEvent('filechooser')
 
 and then:
 
-fileChooser.setFiles(...)
-4. downloadFile()
+fileChooser.setFiles(...) 4. downloadFile()
 
 For download validation:
 
 const download =
-    await this.actions.file.downloadFile(
-        async () => {
-            await this.actions.click(
-                this.downloadButton
-            );
-        }
-    );
+await this.actions.file.downloadFile(
+async () => {
+await this.actions.click(
+this.downloadButton
+);
+}
+);
 
 You can then inspect:
 
 console.log(
-    download.suggestedFilename()
+download.suggestedFilename()
 );
 
 5. downloadAndSave()
@@ -164,16 +161,15 @@ console.log(
 For a test where you actually need the downloaded file:
 
 await this.actions.file.downloadAndSave(
-    async () => {
-        await this.actions.click(
-            this.downloadButton
-        );
-    },
-    'downloads/report.pdf'
+async () => {
+await this.actions.click(
+this.downloadButton
+);
+},
+'downloads/report.pdf'
 );
 
 This gives you a very clean Page Object API.
-
 
 ### Frame Actions
 
@@ -209,4 +205,3 @@ DialogActions
 ├── accept()
 ├── dismiss()
 └── acceptPrompt()
-

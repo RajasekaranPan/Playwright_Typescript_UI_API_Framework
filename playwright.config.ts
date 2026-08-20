@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
- * 
+ *
  * Usage:
  * PowerShell syntax -> $env:ENV_NAME="qa"; npx playwright test --project=chromium
  * Bash syntax: ENV_NAME=qa npx playwright test --project=chromium
@@ -12,8 +12,9 @@ import { defineConfig, devices } from '@playwright/test';
 // npx playwright test
 
 import dotenv from 'dotenv';
-dotenv.config(
-  { path: process.env.ENV_NAME ? `./env-files/.env.${process.env.ENV_NAME}` : `./env-files/.env.qa` });
+dotenv.config({
+  path: process.env.ENV_NAME ? `./env-files/.env.${process.env.ENV_NAME}` : `./env-files/.env.qa`,
+});
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -30,11 +31,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: 5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html',{open: 'always'}]],
+  reporter: [['html', { open: 'always' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout:30_000,
-  expect: 
-  {
+  timeout: 30_000,
+  expect: {
     timeout: 15_000,
   },
   use: {
@@ -44,38 +44,35 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     headless: true,
     //viewport: { width: 1280, height: 720 },
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
     video: 'retain-on-failure',
-    trace: 'on'
+    trace: 'off'
     //browserName: 'chromium',
   },
 
   /* Configure projects for major browsers */
   projects: [
-    
     {
       name: 'api-tests',
       testMatch: '**/apitests/**/*.spec.ts',
-      use:
-      {
-        baseURL: process.env.API_BASE_URL as string ?? 'https://restful-booker.herokuapp.com',
-      }
+      use: {
+        baseURL: (process.env.API_BASE_URL as string) ?? 'https://restful-booker.herokuapp.com',
+      },
     },
     {
       name: 'setup',
       testMatch: 'global.setup.ts',
     },
-  {
+    {
       name: 'chromium',
-      testMatch: '**/ui-tests/**/*.spec.ts', 
-      use: { ...devices['Desktop Chrome'], 
-      storageState: 'playwright/.auth/globalStorageState.json'
-      
-       },
-         expect: 
-  {
-    timeout: 15_000,
-  },
+      testMatch: '**/ui-tests/**/*.spec.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/globalStorageState.json',
+      },
+      expect: {
+        timeout: 15_000,
+      },
       dependencies: ['setup'],
     },
 

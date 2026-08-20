@@ -44,7 +44,7 @@ async function createBooking(request: any) {
     data: payload,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
   });
 
@@ -142,7 +142,9 @@ async function deleteBooking(request: any, bookingId: number, token: string) {
 }
 
 test.describe('Restful Booker - helper methods stage', () => {
-  test('create token, create booking, get, update, patch, delete using helper methods', async ({ request }) => {
+  test('create token, create booking, get, update, patch, delete using helper methods', async ({
+    request,
+  }) => {
     // Step 2: we still use direct URL + direct body data,
     // but the repetitive work is extracted into helper methods.
     const token = await createAuthToken(request);

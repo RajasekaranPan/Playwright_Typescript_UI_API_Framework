@@ -7,6 +7,7 @@ A **production-grade Playwright + TypeScript** UI automation framework for compr
 ## 📌 Framework Overview
 
 This framework provides:
+
 - **Page Object Model (POM)** pattern for maintainable test code
 - **Type-safe Playwright fixtures** for test setup and dependency injection
 - **Multi-source test data** support (Excel, Faker, Infisical environment config)
@@ -20,16 +21,16 @@ This framework provides:
 
 ## 🛠 Technology Stack
 
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| **Test Framework** | Playwright | ^1.62.1 |
-| **Language** | TypeScript | ^7.0.2 |
-| **Runtime** | Node.js | 20.x LTS |
-| **Test Data** | Faker.js / XLSX | ^10.5.0 / ^0.18.5 |
-| **Encryption** | crypto-js | ^4.2.0 |
-| **Environment Config** | dotenv | ^17.4.2 |
-| **Database** | IBM DB2 | ^4.0.1 |
-| **CLI Utilities** | cross-env | ^10.1.0 |
+| Component              | Technology      | Version           |
+| ---------------------- | --------------- | ----------------- |
+| **Test Framework**     | Playwright      | ^1.62.1           |
+| **Language**           | TypeScript      | ^7.0.2            |
+| **Runtime**            | Node.js         | 20.x LTS          |
+| **Test Data**          | Faker.js / XLSX | ^10.5.0 / ^0.18.5 |
+| **Encryption**         | crypto-js       | ^4.2.0            |
+| **Environment Config** | dotenv          | ^17.4.2           |
+| **Database**           | IBM DB2         | ^4.0.1            |
+| **CLI Utilities**      | cross-env       | ^10.1.0           |
 
 ---
 
@@ -50,6 +51,7 @@ Browser (Chromium/Firefox/Safari)
 ```
 
 **Layer Breakdown:**
+
 - **Test Cases** — Business logic and assertions
 - **Fixtures** — Pre-configured Page Objects, utilities, hooks
 - **Page Objects** — UI element locators and interactions
@@ -132,6 +134,7 @@ Tests (Access via EnvironmentManager, CredentialsManager)
 ```
 
 **What Infisical manages:**
+
 - Application credentials (username, password)
 - Database configuration
 - Base URLs for different environments
@@ -167,12 +170,14 @@ See [INFISICAL_README.md](INFISICAL_README.md) for detailed setup.
 ## 🚀 Running UI Tests
 
 ### Install Dependencies
+
 ```bash
 npm install
 npx playwright install chromium
 ```
 
 ### Run Tests
+
 ```bash
 # Run all UI tests (headless)
 npm run test:qa
@@ -226,6 +231,7 @@ npm run test:report:open
 ## 📊 Test Reporting
 
 The framework captures and reports:
+
 - **HTML Report** — Interactive test results
 - **Screenshots** — Captured on test failure
 - **Videos** — Full test recording on failure
@@ -233,6 +239,7 @@ The framework captures and reports:
 - **Test Results** — JSON/XML export available
 
 View latest report:
+
 ```bash
 npm run test:report:open
 ```
@@ -241,21 +248,21 @@ npm run test:report:open
 
 ## 📖 Quick Reference
 
-| Command | Purpose |
-|---------|---------|
-| `npm run test:qa` | Run all UI tests (headless) |
+| Command                          | Purpose                        |
+| -------------------------------- | ------------------------------ |
+| `npm run test:qa`                | Run all UI tests (headless)    |
 | `npm run test:qa:hd:report:html` | Run in headed mode with report |
-| `npm run test:debug` | Debug mode with Inspector |
-| `npm run test:report:open` | View HTML report |
+| `npm run test:debug`             | Debug mode with Inspector      |
+| `npm run test:report:open`       | View HTML report               |
 
-| Folder | Purpose |
-|--------|---------|
-| `pages/` | Page Object classes |
-| `sections/` | Reusable UI sections |
-| `fixtures/` | Test setup and dependency injection |
-| `tests/ui-tests/` | Test specifications |
-| `utils/` | Helper functions |
-| `env-files/` | Environment-specific config |
+| Folder            | Purpose                             |
+| ----------------- | ----------------------------------- |
+| `pages/`          | Page Object classes                 |
+| `sections/`       | Reusable UI sections                |
+| `fixtures/`       | Test setup and dependency injection |
+| `tests/ui-tests/` | Test specifications                 |
+| `utils/`          | Helper functions                    |
+| `env-files/`      | Environment-specific config         |
 
 ---
 
