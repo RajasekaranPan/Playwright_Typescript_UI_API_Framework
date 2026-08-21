@@ -26,7 +26,7 @@ test.describe('Without both fixtures and hooks tests example', async () => {
       ],
     },
     async ({ decryptedValidCredentials, page, loginPage, userProfileMenu }) => {
-      let url = process.env.BASE_URL as string;
+      const url = process.env.BASE_URL as string;
       console.log(`Decrypted Username: ${decryptedValidCredentials.app_username}`);
       console.log(`Decrypted Password: ${decryptedValidCredentials.app_password}`);
       await loginPage.goToOrangeHRMLoginPage(url);
@@ -43,11 +43,10 @@ test.describe('Without both fixtures and hooks tests example', async () => {
   test('Validate Login and goto Support page', async ({
     page,
     decryptedValidCredentials,
-    commonUtils,
     loginPage,
     userProfileMenu,
   }) => {
-    let url = process.env.BASE_URL as string;
+    const url = process.env.BASE_URL as string;
     console.log(`Decrypted Username: ${decryptedValidCredentials.app_username}`);
     console.log(`Decrypted Password: ${decryptedValidCredentials.app_password}`);
     await loginPage.goToOrangeHRMLoginPage(url);

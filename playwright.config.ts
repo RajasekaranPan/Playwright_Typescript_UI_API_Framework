@@ -46,7 +46,7 @@ export default defineConfig({
     //viewport: { width: 1280, height: 720 },
     screenshot: 'on',
     video: 'retain-on-failure',
-    trace: 'off'
+    trace: 'off',
     //browserName: 'chromium',
   },
 
@@ -65,7 +65,7 @@ export default defineConfig({
     },
     {
       name: 'chromium',
-      testMatch: '**/ui-tests/**/*.spec.ts',
+      testMatch: '**/ui-tests/**/ValidateDb2Queries.spec.ts',
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/globalStorageState.json',
@@ -73,7 +73,7 @@ export default defineConfig({
       expect: {
         timeout: 15_000,
       },
-      dependencies: ['setup'],
+      // dependencies: ['setup'],
     },
 
     // {

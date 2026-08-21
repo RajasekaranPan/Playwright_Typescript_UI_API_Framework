@@ -1,6 +1,5 @@
 import { test } from '../../fixtures/hooks-fixtures';
 import { expect } from '@playwright/test';
-import { EnvironmentManager } from '../../utils/EnvironmentManager';
 import { EmployeeListPage } from '../../pages/EmployeeListsPage';
 
 test.describe(
@@ -30,7 +29,9 @@ test.describe(
           },
         ],
       },
-      async ({ page, authenticate }) => {
+      async ({ page, authenticate: _authenticate }) => {
+        //I intentionally need the authenticate fixture to execute,
+        //but I don't need to use the UserProfileMenu object returned by it.
         await test.step('Playwright network intercept using route and response mockup', async () => {
           // Network mocking
           await page.route('**/web/index.php/api/v2/pim/employees**', async (route) => {

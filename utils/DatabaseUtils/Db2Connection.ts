@@ -1,4 +1,4 @@
-import ibmdb from 'ibm_db';
+import * as ibmdb from 'ibm_db';
 
 export class Db2Connection {
   private static connectionString(): string {
@@ -13,16 +13,16 @@ export class Db2Connection {
   }
 
   static async connect() {
-    return await ibmdb.open(this.connectionString());
+    return ibmdb.open(this.connectionString());
   }
 
-  static async query<T = any>(sql: string, parameters: any[] = []): Promise<T[]> {
+  static async query<T>(sql: string, parameters: ibmdb.SQLParam[] = []): Promise<T[]> {
     const connection = await this.connect();
 
     try {
       const result = await connection.query(sql, parameters);
 
-      return result as T[];
+      return result as unknown as T[];
     } finally {
       await connection.close();
     }

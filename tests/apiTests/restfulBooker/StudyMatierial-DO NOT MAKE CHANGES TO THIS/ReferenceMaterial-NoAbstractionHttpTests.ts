@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, APIRequestContext } from '@playwright/test';
 
 const baseUrl = process.env.API_BASE_URL ?? 'https://restful-booker.herokuapp.com';
 
-async function createAuthToken(request: any) {
+async function createAuthToken(request: APIRequestContext) {
   const url = `${baseUrl}/auth`;
   const payload = {
     username: 'admin',

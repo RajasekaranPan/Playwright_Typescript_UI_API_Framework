@@ -1,4 +1,3 @@
-import { LoginPage } from '../pages/LoginPage';
 import { UserProfileMenu } from '../sections/UserProfileMenu';
 import { EnvironmentManager } from '../utils/EnvironmentManager';
 import { test as base } from './common-fixtures';

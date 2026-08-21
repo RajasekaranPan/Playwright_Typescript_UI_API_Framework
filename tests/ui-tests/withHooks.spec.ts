@@ -20,11 +20,11 @@ test.describe('Without fixtures but with hooks tests example', () => {
   });
 
   test.beforeEach(async ({ page, commonUtils, loginPage }) => {
-    let url = process.env.BASE_URL as string;
-    let encryptedUsernameFromEnv = process.env.VALID_USERNAME as string;
-    let encryptedPasswordFromEnv = process.env.VALID_PASSWORD as string;
-    let decryptedUsername = commonUtils.decryptData(encryptedUsernameFromEnv);
-    let decryptedPassword = commonUtils.decryptData(encryptedPasswordFromEnv);
+    const url = process.env.BASE_URL as string;
+    const encryptedUsernameFromEnv = process.env.VALID_USERNAME as string;
+    const encryptedPasswordFromEnv = process.env.VALID_PASSWORD as string;
+    const decryptedUsername = commonUtils.decryptData(encryptedUsernameFromEnv);
+    const decryptedPassword = commonUtils.decryptData(encryptedPasswordFromEnv);
     console.log(`Decrypted Username: ${decryptedUsername}`);
     console.log(`Decrypted Password: ${decryptedPassword}`);
     await loginPage.goToOrangeHRMLoginPage(url);
@@ -51,7 +51,7 @@ test.describe('Without fixtures but with hooks tests example', () => {
     },
   );
 
-  test('Validate Login and check if Logout link is present', async ({ page, userProfileMenu }) => {
+  test('Validate Login and check if Logout link is present', async ({ userProfileMenu }) => {
     await userProfileMenu.clickOnHamburgerMenu();
     const isLogoutPresent = await userProfileMenu.checkIflogoutPresent();
     expect(isLogoutPresent).toBe(true);

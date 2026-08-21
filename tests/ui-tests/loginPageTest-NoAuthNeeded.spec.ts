@@ -10,7 +10,7 @@ test.describe('Landing Page Validation', () => {
   });
 
   test.beforeEach(async ({ loginPage }) => {
-    let url = process.env.BASE_URL as string;
+    const url = process.env.BASE_URL as string;
     await loginPage.goToOrangeHRMLoginPage(url);
   });
 

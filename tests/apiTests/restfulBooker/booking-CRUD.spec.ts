@@ -8,7 +8,6 @@ import { GetBookingResponseSchema } from '../../../api-models/Booking/GetBooking
 import { UpdateBookingRequest } from '../../../api-models/Booking/UpdateBookingRequest';
 import { UpdateBookingResponseSchema } from '../../../api-models/Booking/UpdateBookingResponse';
 
-import { PatchBookingRequest } from '../../../api-models/Booking/PatchBookingRequest';
 import { PatchBookingResponseSchema } from '../../../api-models/Booking/PatchBookingResponse';
 import { CreateTokenResponseSchema } from '../../../api-models/Auth/CreateTokenResponse';
 import { BookingDataFactory } from '../../../api-datafactory/BookingDataFactory';

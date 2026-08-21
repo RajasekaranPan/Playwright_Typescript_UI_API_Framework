@@ -5,8 +5,9 @@ type CommonUtilsFixture = {
   commonUtils: CommonUtils;
 };
 
+//ESLint configuration can explicitly allow unused variables beginning with _.
 const test = base.extend<CommonUtilsFixture>({
-  commonUtils: async ({}, use) => {
+  commonUtils: async (_, use) => {
     await use(new CommonUtils());
   },
 });

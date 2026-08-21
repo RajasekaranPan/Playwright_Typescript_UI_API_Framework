@@ -1,4 +1,4 @@
-import { Frame, FrameLocator, Locator, Page } from '@playwright/test';
+import { Frame, FrameLocator, Page } from '@playwright/test';
 
 export class FrameActions {
   constructor(private readonly page: Page) {}

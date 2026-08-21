@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-
-     "format": "prettier --write .",
-  "format:check": "prettier --check .",
-
-   "typecheck": "tsc --noEmit",
-   
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "code_quality_check": "npm run format:check && npm run lint && npm run typecheck",
     "test:qa": "cross-env ENV_NAME=qa npx playwright test --project=chromium --config=playwright.config.ts ",
     "comment": "the below command to run tests in headed mode with HTML report generation",
     "test:qa:hd:report:html": "cross-env ENV_NAME=qa SECRET_KEY=raja143 npx playwright test --project=chromium --headed",
@@ -33,12 +33,14 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^26.2.0",
     "eslint": "^10.8.1",
     "prettier": "^3.9.6",
-    "typescript": "^7.0.2"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.67.0"
   },
   "dependencies": {
     "@faker-js/faker": "^10.5.0",

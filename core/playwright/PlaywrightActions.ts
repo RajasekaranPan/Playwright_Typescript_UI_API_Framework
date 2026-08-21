@@ -1,6 +1,6 @@
 // Wrapper around Playwright APIs
 
-import { Page, Locator, Frame } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 import { NavigationActions } from './NavigationActions';
 import { WaitActions } from './WaitActions';

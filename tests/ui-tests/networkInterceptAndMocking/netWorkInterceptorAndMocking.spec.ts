@@ -1,6 +1,5 @@
 import { test } from '../../../fixtures/hooks-fixtures';
 import { expect } from '@playwright/test';
-import { EnvironmentManager } from '../../../utils/EnvironmentManager';
 import { EmployeeListPage } from '../../../pages/EmployeeListsPage';
 
 test.describe(
@@ -27,7 +26,7 @@ test.describe(
           },
         ],
       },
-      async ({ page, authenticate }) => {
+      async ({ page, authenticate: _authenticate }) => {
         // await test.step('Navigate to Orange HRM Login Page followed by PIM', async() => {
         //     await loginPage.goToOrangeHRMLoginPage(EnvironmentManager.getBaseUrl());
         // });

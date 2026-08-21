@@ -63,15 +63,15 @@ test.describe(
             { type: 'Defect', description: 'https:jira.com/defects' },
           ],
         },
-        async ({ page, commonUtils, loginPage, userProfileMenu }) => {
+        async ({ page, commonUtils, loginPage }) => {
           await test.step('Navigate to Orange HRM Login Page', async () => {
             await loginPage.goToOrangeHRMLoginPage(EnvironmentManager.getBaseUrl());
           });
 
           const credentials = CredentialsManager.getCredentials(data.UsernameKey, data.PasswordKey);
 
-          let decryptedUserName = commonUtils.decryptData(credentials.username);
-          let decryptedPassword = commonUtils.decryptData(credentials.password);
+          const decryptedUserName = commonUtils.decryptData(credentials.username);
+          const decryptedPassword = commonUtils.decryptData(credentials.password);
 
           await test.step('Login into Orange HRM using valid credentials', async () => {
             await loginPage.loginToOrangeHRM(decryptedUserName, decryptedPassword);

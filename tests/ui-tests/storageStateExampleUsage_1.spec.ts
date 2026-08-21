@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/hooks-fixtures';
-import { EnvironmentManager } from '../../utils/EnvironmentManager';
 
 test.describe('Global login and test hooks example', () => {
   // NOTE: StorageState functionality -> Either tests\storageStateExampleUsage_1.spec.ts works
@@ -38,7 +37,7 @@ test.describe('Global login and test hooks example', () => {
         { type: 'Defect', description: 'https:jira.com/defects' },
       ],
     },
-    async ({ page, beforeAfterHook, userProfileMenu }) => {
+    async ({ page, beforeAfterHook: _beforeAfterHook, userProfileMenu }) => {
       await userProfileMenu.clickOnHamburgerMenu();
       await userProfileMenu.clickOnSupportLink();
       await expect(page).toHaveURL(/support/);

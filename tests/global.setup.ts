@@ -1,14 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/hooks-fixtures';
-import de from 'zod/v4/locales/de.js';
 
 test('Global Setup (Auth storage state) for Auto Login', async ({
   page,
   decryptedValidCredentials,
-  commonUtils,
   loginPage,
 }) => {
-  let url = process.env.BASE_URL as string;
+  const url = process.env.BASE_URL as string;
   const app_username = decryptedValidCredentials.app_username;
   const app_password = decryptedValidCredentials.app_password;
   console.log(`Decrypted Username: ${decryptedValidCredentials.app_username}`);

@@ -1,4 +1,4 @@
-import { EmployeeScenarioData, Scenario } from './types';
+import { EmployeeScenarioData } from './types';
 
 import { EmployeeDataProvider } from './EmployeeDataProvider';
 

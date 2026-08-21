@@ -1,7 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { PlaywrightActions } from '../core/playwright/PlaywrightActions';
 import { BasePage } from '../core/BasePage';
-import { fi } from '@faker-js/faker';
 
 export class PersonalDetailsPage extends BasePage {
   readonly addAttachmentButton: Locator;

@@ -1,0 +1,14 @@
+export interface Employee401KEnrollment {
+  ENROLLMENT_ID: number;
+  EMPLOYEE_ID: number;
+  PLAN_401K_ID: number;
+  CONTRIBUTION_PERCENT: number;
+  BASIC_CONTRIBUTION_AMOUNT: number;
+  CATCHUP_CONTRIBUTION_AMOUNT: number;
+  TOTAL_CONTRIBUTION_AMOUNT: number;
+  ENROLLMENT_STATUS: string;
+  EFFECTIVE_DATE: Date;
+  END_DATE?: Date;
+  CREATED_DATE?: Date;
+  UPDATED_DATE?: Date;
+}
